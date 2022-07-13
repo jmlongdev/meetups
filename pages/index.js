@@ -1,6 +1,5 @@
-// import Layout from "../components/layout/Layout";
 import MeetupList from "../components/meetups/MeetupList";
-import Card from "../components/ui/Card";
+
 const DUMMY_MEETUPS = [
   {
     id: "m1",
@@ -20,11 +19,34 @@ const DUMMY_MEETUPS = [
   },
 ];
 
-const HomePage = () => {
-  return (
-    <Card>
-      <MeetupList meetups={DUMMY_MEETUPS} />
-    </Card>
-  );
+const HomePage = (props) => {
+  return <MeetupList meetups={props.meetups} />;
 };
+
+// export async function getServerSideProps(context) {
+//   // server side -- better for data that changes alot --
+// when you need access to req and red --
+//   const req = context.req;
+//   const res = context.res;
+
+//   // fetch data from an API
+//   return {
+//     props: {
+//       meetups: DUMMY_MEETUPS,
+//     },
+//   };
+// }
+
+export async function getStaticProps() {
+  // user side -- this one is better for our example
+
+  //fetch data from an API
+  return {
+    props: {
+      meetups: DUMMY_MEETUPS,
+    },
+    revalidate: 1,
+  };
+} //reserved name in next.js
+
 export default HomePage;
