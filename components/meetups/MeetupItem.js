@@ -9,7 +9,6 @@ function MeetupItem(props) {
   const router = useRouter();
   const showDetailsHandler = () => {
     const meetupId = router.push(`/${props.id}`);
-    console.log(meetupId);
   };
 
   return (
